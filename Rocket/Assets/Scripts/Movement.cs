@@ -51,6 +51,11 @@ public class Movement : MonoBehaviour
                 rightThrusterParticle.Play();
             rb.freezeRotation = false;
         }
+        else
+        {
+            rightThrusterParticle.Stop();
+            leftThrusterParticle.Stop();
+        }
     }
 
     void ProcessSound()

@@ -277,7 +277,7 @@ MonoBehaviour:
   rotationThrust: 200
   mainEngine: {fileID: 8300000, guid: e09730846433641b78bba406b24b8a50, type: 3}
   mainEngineParticle: {fileID: 198100718571622925}
-  rightThrusterParticle: {fileID: 584678573279972864}
+  rightThrusterParticle: {fileID: 1438897318306339879}
   leftThrusterParticle: {fileID: 584678573279972864}
 --- !u!82 &77799156
 AudioSource:
@@ -980,6 +980,11 @@ PrefabInstance:
 --- !u!4 &1250236273922037359 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 771087676723270698, guid: d4b06ebeeaf0ac044aeed997d98443c2, type: 3}
+  m_PrefabInstance: {fileID: 2011648248311956037}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1438897318306339879 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 584678573886053986, guid: d4b06ebeeaf0ac044aeed997d98443c2, type: 3}
   m_PrefabInstance: {fileID: 2011648248311956037}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4363199618890433422
