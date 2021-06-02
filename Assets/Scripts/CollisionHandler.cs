@@ -8,30 +8,49 @@ public class CollisionHandler : MonoBehaviour
     [SerializeField] float delay = 1f;
     [SerializeField] AudioClip success;
     [SerializeField] AudioClip crash;
+    [SerializeField] ParticleSystem successParticle;
+    [SerializeField] ParticleSystem crashParticle;
 
     AudioSource audioSource;
+    Movement movement;
+    bool isTransitioning = false;
+
     private void Start() {
         audioSource = GetComponent<AudioSource>();
+        movement = GetComponent<Movement>();
     }
 
    private void OnCollisionEnter(Collision other) {
-       switch(other.gameObject.tag){
+        if(isTransitioning) 
+        {
+           return;
+        }
+
+        switch(other.gameObject.tag)
+        {
             case "Start":
-                Debug.Log("Start");
                 break;
             case "Finish":
-                Invoke("LoadNextLevel", delay);
+                StatSuccessSquence();
                 break;
             default:
                 StatCrashSquence();
                 break;         
-
-       }
+        }
    }
 
-   void LoadNextLevel()
+   void StatSuccessSquence()
    {
+        audioSource.Stop();
+        isTransitioning = true;
+        movement.enabled = false;
         audioSource.PlayOneShot(success, 1);
+        successParticle.Play();
+        Invoke("NextLevel", delay);
+   }
+
+   private void NextLevel() 
+   {
         int activeScene = SceneManager.GetActiveScene().buildIndex;
         if(activeScene > 0) 
         {
@@ -44,8 +63,11 @@ public class CollisionHandler : MonoBehaviour
 
    void StatCrashSquence() 
    {
-       GetComponent<Movement>().enabled = false;
+       audioSource.Stop();
+       isTransitioning = true;
+       movement.enabled = false;
        audioSource.PlayOneShot(crash, 1);
+       crashParticle.Play();
        Invoke("RelaodLevel", delay);
    }
 
