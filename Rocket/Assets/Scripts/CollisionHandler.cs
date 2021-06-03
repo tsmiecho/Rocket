@@ -14,10 +14,22 @@ public class CollisionHandler : MonoBehaviour
     AudioSource audioSource;
     Movement movement;
     bool isTransitioning = false;
+    bool collisonEnabled = true;
 
     private void Start() {
         audioSource = GetComponent<AudioSource>();
         movement = GetComponent<Movement>();
+    }
+
+    private void Update() {
+        if(Input.GetKey(KeyCode.C)) 
+        {
+            collisonEnabled = !collisonEnabled;
+        }
+        if (Input.GetKey(KeyCode.L))
+        {
+            NextLevel();
+        }
     }
 
    private void OnCollisionEnter(Collision other) {
@@ -34,7 +46,8 @@ public class CollisionHandler : MonoBehaviour
                 StatSuccessSquence();
                 break;
             default:
-                StatCrashSquence();
+                if(collisonEnabled)
+                    StatCrashSquence();
                 break;         
         }
    }
